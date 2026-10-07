@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Loy Krathong night palette */
+  --navy-950: #0b1522;
+  --navy-900: #101d2e;
+  --navy-800: #162638;
+  --navy-700: #1e3349;
+  --navy-600: #2a4560;
+  --gold-600: #af915f;
+  --gold-500: #c6a76e;
+  --gold-400: #d9bd85;
+  --gold-200: #fce1b6;
+  --paper: #f7f4ec;
+  --paper-warm: #f1ecdf;
+  --ink: #1c2430;
+  --candle: #ffb84d;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Sarabun', 'Kanit', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Kanit', 'Sarabun', system-ui, sans-serif;
+  }
+  .font-ceremony {
+    font-family: 'Chonburi', 'Kanit', serif;
+  }
+  ::selection {
+    background: rgba(198, 167, 110, 0.45);
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c9c0ab;
+    border-radius: 8px;
+    border: 2px solid var(--paper);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-600);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 select-none;
+  }
+  .btn-gold {
+    @apply btn text-[#101d2e];
+    background: linear-gradient(135deg, #d9bd85, #af915f);
+    box-shadow: 0 4px 14px rgba(175, 145, 95, 0.35);
+  }
+  .btn-gold:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+  }
+  .btn-navy {
+    @apply btn text-white;
+    background: #162638;
+  }
+  .btn-navy:hover {
+    background: #1e3349;
+  }
+  .btn-ghost {
+    @apply btn border border-[#d8d0bd] bg-white/60 text-[#4a4636] hover:bg-white;
+  }
+  .btn-danger {
+    @apply btn bg-[#b3372b] text-white hover:bg-[#972c22];
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .input {
+    @apply w-full rounded-xl border border-[#d9d2c0] bg-white px-3 py-2 text-sm outline-none transition focus:border-[#af915f] focus:ring-2 focus:ring-[#af915f]/25;
+  }
+  .card-soft {
+    @apply rounded-2xl border border-[#e6dfcd] bg-white shadow-[0_1px_3px_rgba(28,36,48,0.06)];
+  }
+  .th-cell {
+    @apply px-3 py-2.5 text-left text-xs font-bold uppercase tracking-wide text-[#fce1b6]/90 whitespace-nowrap;
+  }
+  .td-cell {
+    @apply px-3 py-2.5 text-sm align-middle;
+  }
+}
+
+/* ---------- Cover animations ---------- */
+@keyframes floatKrathong {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+@keyframes driftX {
+  0% { transform: translateX(-6vw); }
+  100% { transform: translateX(106vw); }
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  45% { opacity: 0.75; transform: scale(0.92) translateY(1px); }
+  70% { opacity: 0.95; transform: scale(1.05); }
+}
+@keyframes ripple {
+  0% { transform: scale(0.6); opacity: 0.55; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes shimmerStar {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.9; }
+}
+@keyframes rotateRing {
+  to { transform: rotate(360deg); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 24px rgba(255, 184, 77, 0.35); }
+  50% { box-shadow: 0 0 44px rgba(255, 184, 77, 0.6); }
+}
+.anim-krathong { animation: floatKrathong 5s ease-in-out infinite; }
+.anim-drift { animation: driftX linear infinite; }
+.anim-flicker { animation: flicker 2.2s ease-in-out infinite; transform-origin: bottom center; }
+.anim-ripple { animation: ripple 3.4s ease-out infinite; }
+.anim-star { animation: shimmerStar 3s ease-in-out infinite; }
+.anim-rotate-ring { animation: rotateRing 18s linear infinite; }
+.anim-fade-up { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.anim-glow { animation: glowPulse 3s ease-in-out infinite; }
+
+/* ---------- Print ---------- */
+@media print {
+  body { background: #fff !important; }
+  .no-print { display: none !important; }
+  .print-area { display: block !important; }
+  .print-page {
+    page-break-after: always;
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
